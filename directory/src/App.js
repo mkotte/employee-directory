@@ -1,14 +1,39 @@
-import React from 'react';
-import Main from "./components/Main.js"
+// Table.js
+import React, { Component } from 'react';
+import Header from "./components/Header.js"
+import Table from "./components/Table.js"
+import API from "./utils/API.js";
 
-// import './App.css';
+class App extends Component {
 
-function App() {
-  return (
-    <div className="App">
-      <Main />
-    </div>
-  );
+state = {
+  employees: [{}],
+  orderedEmployees: [{}]     
 }
+
+// when this component mounts the API is called and initial states are set
+componentDidMount() {
+  API.fetchEmployeeInfo().then(res => res.json())
+  .then(data => {
+      console.log(data.results);
+      this.setState({
+        employees: data.results,
+        orderedEmployees: data.results
+      })
+      
+  }).catch(err => console.log(err));
+};
+
+render() {
+  return (
+      <div className="App">
+          <Header />
+          {/* {console.log(employees)} */}
+          <Table employees={this.state.employees} />
+      </div>
+  );
+};
+
+};
 
 export default App;
