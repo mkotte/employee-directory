@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import Table from "./Table"
+import Table from "./Table.js"
 
-export default class Main extends Component {
+class Main extends Component {
     render() {
         return (
             <>
@@ -10,3 +10,5 @@ export default class Main extends Component {
         );
     }
 };
+
+export default Main;
