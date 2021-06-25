@@ -12,15 +12,30 @@ class Table extends Component {
       orderedEmployees: []     
     }
     
+    
+    
     sortByFirstName() {
+      console.log("hit");
       // get employees list from state
-      
       // sort by first name
+      let sorted = this.state.employees
+      sorted.sort(this.compare);
       // set the result back to employees list state
-
-
       // this.state.employees 
-    }
+      this.setState({
+        employees: sorted
+      });
+    };
+
+    compare(a, b) {
+      if (a.name.first < b.name.first) {
+        return -1;
+      } 
+      if (a.name.first > b.name.first){
+        return 1        
+      }
+      return 0
+    };
 
     // when this component mounts the API is called and initial states are set
     componentDidMount()  {
@@ -41,7 +56,10 @@ class Table extends Component {
               <thead className="thead-light">
                 <tr>
                   <th scope="col">Photo</th>
-                  <th scope="col">First</th>
+                  <th scope="col"><button className="btn" onClick={ () => {
+                    // console.log("hitt")
+                    this.sortByFirstName()
+                  }}>First</button></th>
                   <th scope="col">Last</th>
                   <th scope="col">Email</th>
                   <th scope="col">Phone Number</th>
